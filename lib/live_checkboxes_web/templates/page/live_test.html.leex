@@ -1,3 +1,12 @@
-<%= for user <- @users do %>
-  <%= live_component @socket, LiveCheckboxesWeb.FormComponent, user: user %>
+<%= form_for :departure, "/", [phx_change: "check_enabled"], fn form -> %>
+  <label>
+    <%= tag(:input, name: "departure[students][]", type: "checkbox", value: "timmy") %>
+    Timmy
+  </label>
+
+  <label>
+    <%= tag(:input, name: "departure[students][]", type: "checkbox", value: "jimmy") %>
+    Jimmy
+  </label>
+  <%= tag(:input, type: "submit", disabled: @disabled) %>
 <% end %>

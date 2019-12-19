@@ -6,24 +6,18 @@ defmodule LiveCheckboxesWeb.BrokenLiveView do
   end
 
   def mount(_, socket) do
-    users = [
-      %{
-        id: 1,
-        name: "Jessica",
-        groups: [%{id: 1, name: "IT"}, %{id: 2, name: "Marketing"}]
-      },
-      %{
-        id: 2,
-        name: "Teh-Way",
-        groups: [%{id: 1, name: "IT"}, %{id: 2, name: "Marketing"}]
-      }
-    ]
-
-    {:ok, assign(socket, disabled: false, users: users)}
+    {:ok, assign(socket, disabled: true)}
   end
 
-  def handle_event("check_enabled", _value, socket) do
-    IO.puts("check_enabled")
-    {:noreply, socket}
+  def handle_event(
+        "check_enabled",
+        %{"departure" => %{"students" => student_ids}} = params,
+        socket
+      ) do
+    {:noreply, assign(socket, :disabled, false)}
+  end
+
+  def handle_event("check_enabled", params, socket) do
+    {:noreply, assign(socket, :disabled, true)}
   end
 end
