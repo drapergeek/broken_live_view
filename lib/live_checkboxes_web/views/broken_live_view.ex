@@ -11,7 +11,7 @@ defmodule LiveCheckboxesWeb.BrokenLiveView do
 
   def handle_event(
         "check_enabled",
-        %{"departure" => %{"students" => student_ids}} = params,
+        %{"departure" => %{"students" => _student_ids}},
         socket
       ) do
     {:noreply, assign(socket, :disabled, false)}
